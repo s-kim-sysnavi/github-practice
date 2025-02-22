@@ -26,6 +26,9 @@ RUN apt-get update && \
   libonig-dev \
   libzip-dev \
   curl \
+  libfreetype6-dev \
+  libjpeg62-turbo-dev \
+  libpng-dev \
   && apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
@@ -34,7 +37,8 @@ RUN locale-gen en_US.UTF-8 && \
   localedef -f UTF-8 -i en_US en_US.UTF-8
 
 # PHP拡張のインストール
-RUN docker-php-ext-install intl pdo_mysql zip bcmath
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
+  docker-php-ext-install intl pdo_mysql zip bcmath gd
 
 # Node.js 最新 LTS（20.x） をインストール
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \

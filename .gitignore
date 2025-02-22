@@ -1,3 +1,4 @@
 .DS_store
+*Zone.Identifier
 infra/docker/mysql/storage
 .env
